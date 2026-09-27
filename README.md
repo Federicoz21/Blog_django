@@ -1,12 +1,14 @@
 # Blog Django
 
-Base de un blog web hecho con Django.
+Blog web hecho con Django, que voy armando a lo largo del curso.
 
 ## Descripción
 
-Este repo tiene el punto de partida del blog: el proyecto `blog_project` ya creado y configurado, y la app `posts`, que es donde después van a ir las publicaciones.
+El proyecto se llama `blog_project` y tiene una app principal, `posts`.
 
-Por ahora no hay modelos, vistas ni templates propios. La idea de esta etapa es dejar la estructura ordenada y funcionando para ir sumando el resto en las próximas entregas.
+En esta etapa el blog ya se puede recorrer desde el navegador: tiene una página de inicio, una lista de posts y una página "Acerca de". Todas comparten el mismo encabezado, menú y pie gracias a un template base, y los estilos salen de un archivo CSS propio.
+
+Todavía no usa base de datos ni formularios. Los posts que se ven en la lista están escritos a mano en la vista, y más adelante van a salir de un modelo.
 
 ## Requisitos
 
@@ -75,9 +77,31 @@ pip install -r requirements.txt
 python manage.py runserver
 ```
 
-Después abrí http://127.0.0.1:8000/ en el navegador. Si aparece la pantalla de bienvenida de Django, está todo bien. Para cortar el servidor, `Ctrl + C`.
+Después abrí http://127.0.0.1:8000/ en el navegador. Tendría que aparecer la página de inicio del blog con los estilos aplicados. Para cortar el servidor, `Ctrl + C`.
 
-En la terminal puede salir un aviso de migraciones pendientes (`You have 18 unapplied migration(s)`). Es normal en esta etapa y no impide que el servidor funcione. Si lo querés sacar, corré `python manage.py migrate` antes de levantarlo.
+En la terminal puede salir un aviso de migraciones pendientes (`You have 18 unapplied migration(s)`). Es normal en esta etapa y no impide que el sitio funcione. Si lo querés sacar, corré `python manage.py migrate` antes de levantarlo.
+
+## Páginas del sitio
+
+| Página    | URL                              | Vista         | Template                   |
+|-----------|----------------------------------|---------------|----------------------------|
+| Inicio    | http://127.0.0.1:8000/           | `inicio`      | `posts/inicio.html`        |
+| Posts     | http://127.0.0.1:8000/posts/     | `lista_posts` | `posts/lista_posts.html`   |
+| Acerca de | http://127.0.0.1:8000/acerca/    | `acerca`      | `posts/acerca.html`        |
+
+Se puede pasar de una a otra con el menú de arriba. La página en la que estás aparece resaltada.
+
+## Cómo está armado
+
+El recorrido de cada pedido es: **ruta → vista → template → estático**.
+
+1. `blog_project/urls.py` incluye las rutas de la app con `include('posts.urls')`.
+2. `posts/urls.py` define un `path` para cada página y le pone nombre (`inicio`, `lista_posts`, `acerca`).
+3. Cada vista de `posts/views.py` usa `render()` para devolver su template.
+4. Los templates hijos arrancan con `{% extends 'posts/base.html' %}` y completan el `{% block content %}`.
+5. `base.html` tiene `{% load static %}` al principio y enlaza el CSS con `{% static 'posts/css/estilos.css' %}`.
+
+Los links del menú usan `{% url 'nombre' %}`, así que si algún día cambia una dirección, se toca solo en `urls.py`.
 
 ## Estructura
 
@@ -101,8 +125,21 @@ Blog_django/
     │   └── __init__.py
     ├── models.py
     ├── tests.py
-    └── views.py
+    ├── urls.py
+    ├── views.py
+    ├── templates/
+    │   └── posts/
+    │       ├── base.html
+    │       ├── inicio.html
+    │       ├── lista_posts.html
+    │       └── acerca.html
+    └── static/
+        └── posts/
+            └── css/
+                └── estilos.css
 ```
+
+Los templates y el CSS van dentro de una carpeta con el nombre de la app (`templates/posts/` y `static/posts/`) para que no se mezclen con los de otras apps si el proyecto crece.
 
 ## Configuración
 
@@ -116,7 +153,7 @@ El `.gitignore` deja afuera el entorno virtual (`venv/`), los archivos `__pycach
 
 ## Aplicaciones
 
-- `posts`: app principal del blog. Acá se van a manejar las publicaciones.
+- `posts`: app principal del blog. Tiene las vistas, las rutas, los templates y el CSS del sitio.
 
 ## Dependencias
 
@@ -130,6 +167,13 @@ Si instalás algo nuevo, acordate de actualizar el archivo con `pip freeze > req
 ```powershell
 pip freeze | Out-File -Encoding ascii requirements.txt
 ```
+
+## Entregas
+
+Cada preentrega queda marcada con una etiqueta (tag) en el repo, para poder ver cómo estaba el proyecto en ese momento:
+
+- `preentrega-7`: base del proyecto Django y app `posts`.
+- `preentrega-8`: templates, herencia, rutas, vistas y CSS.
 
 ## Autor
 
