@@ -170,10 +170,8 @@ pip freeze | Out-File -Encoding ascii requirements.txt
 
 ## Entregas
 
-Cada preentrega queda marcada con una etiqueta (tag) en el repo, para poder ver cómo estaba el proyecto en ese momento:
-
-- `preentrega-7`: base del proyecto Django y app `posts`.
-- `preentrega-8`: templates, herencia, rutas, vistas y CSS.
+- Preentrega 7 (base del proyecto Django y app `posts`): quedó guardada tal cual se entregó en la rama [`preentrega-7`](https://github.com/Federicoz21/Blog_django/tree/preentrega-7).
+- Preentrega 8 (templates, herencia, rutas, vistas y CSS): es lo que está en `main`.
 
 ## Autor
 
