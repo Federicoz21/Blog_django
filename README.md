@@ -77,6 +77,8 @@ python manage.py runserver
 
 Después abrí http://127.0.0.1:8000/ en el navegador. Si aparece la pantalla de bienvenida de Django, está todo bien. Para cortar el servidor, `Ctrl + C`.
 
+En la terminal puede salir un aviso de migraciones pendientes (`You have 18 unapplied migration(s)`). Es normal en esta etapa y no impide que el servidor funcione. Si lo querés sacar, corré `python manage.py migrate` antes de levantarlo.
+
 ## Estructura
 
 ```
