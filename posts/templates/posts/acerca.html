@@ -1,0 +1,44 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}Acerca de | Blog Django{% endblock %}
+
+{% block content %}
+<section class="portada portada--chica">
+    <h1>Acerca de</h1>
+    <p>Quién está detrás del blog y para qué lo armé.</p>
+</section>
+
+<section class="seccion">
+    <h2>Sobre mí</h2>
+    <p>
+        Soy Federico Zangaro y estoy aprendiendo programación con Python. Arranqué escribiendo scripts simples
+        en la consola, después vinieron las listas y diccionarios, las funciones, los módulos, las clases y los
+        archivos JSON. Ahora estoy dando mis primeros pasos en desarrollo web con Django.
+    </p>
+    <p>
+        Me gusta entender cómo funcionan las cosas por dentro, así que cada vez que algo no anda prefiero
+        buscar el porqué antes de copiar una solución.
+    </p>
+</section>
+
+<section class="seccion">
+    <h2>Para qué es este sitio</h2>
+    <p>
+        Este blog es el proyecto que voy construyendo a lo largo del curso. Me sirve para practicar cada tema nuevo
+        sobre algo concreto y, de paso, dejar registrado cómo fue avanzando.
+    </p>
+    <p>
+        La idea es que con el tiempo se convierta en un blog completo, donde se puedan publicar, editar y leer
+        artículos desde el navegador.
+    </p>
+</section>
+
+<section class="seccion">
+    <h2>Con qué está hecho</h2>
+    <ul class="lista">
+        <li>Python 3</li>
+        <li>Django 5.2</li>
+        <li>HTML y CSS</li>
+    </ul>
+</section>
+{% endblock %}

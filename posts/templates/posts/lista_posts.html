@@ -1,0 +1,22 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}Posts | Blog Django{% endblock %}
+
+{% block content %}
+<section class="portada portada--chica">
+    <h1>Posts</h1>
+    <p>Las publicaciones del blog, de la más vieja a la más nueva.</p>
+</section>
+
+<section class="publicaciones">
+    {% for post in posts %}
+        <article class="post">
+            <p class="post__fecha">{{ post.fecha }}</p>
+            <h2>{{ post.titulo }}</h2>
+            <p>{{ post.resumen }}</p>
+        </article>
+    {% empty %}
+        <p>Todavía no hay publicaciones.</p>
+    {% endfor %}
+</section>
+{% endblock %}

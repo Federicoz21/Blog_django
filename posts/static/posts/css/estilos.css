@@ -1,0 +1,229 @@
+/* ===== Colores y medidas generales ===== */
+:root {
+    --fondo: #f7f5f0;
+    --texto: #23272f;
+    --texto-suave: #5b6270;
+    --principal: #1f4e5f;
+    --acento: #e07a3f;
+    --blanco: #ffffff;
+    --borde: #e3ded3;
+    --radio: 10px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--texto);
+    background-color: var(--fondo);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== Encabezado y menú ===== */
+.encabezado {
+    background-color: var(--principal);
+    color: var(--blanco);
+}
+
+.encabezado__interior {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+}
+
+.logo {
+    color: var(--blanco);
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.menu {
+    display: flex;
+    gap: 8px;
+}
+
+.menu a {
+    color: var(--blanco);
+    text-decoration: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.menu a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.menu a.activo {
+    background-color: var(--acento);
+}
+
+/* ===== Contenido ===== */
+.contenido {
+    flex: 1;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+h1,
+h2,
+h3 {
+    color: var(--principal);
+    line-height: 1.25;
+    margin-top: 0;
+}
+
+h1 {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-size: 1.5rem;
+}
+
+p {
+    margin: 0 0 14px;
+}
+
+.portada {
+    background-color: var(--blanco);
+    border-left: 6px solid var(--acento);
+    border-radius: var(--radio);
+    padding: 36px;
+    margin-bottom: 32px;
+}
+
+.portada--chica {
+    padding: 28px 36px;
+}
+
+.portada--chica h1 {
+    font-size: 2.1rem;
+}
+
+.bienvenida {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.boton {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 10px 22px;
+    background-color: var(--acento);
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+.boton:hover {
+    background-color: #c8662f;
+}
+
+.seccion {
+    margin-bottom: 32px;
+}
+
+.seccion p {
+    color: var(--texto-suave);
+}
+
+.lista {
+    color: var(--texto-suave);
+    padding-left: 20px;
+}
+
+/* ===== Tarjetas de la página de inicio ===== */
+.tarjetas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.tarjeta {
+    background-color: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 22px;
+}
+
+.tarjeta p {
+    color: var(--texto-suave);
+    margin: 0;
+}
+
+/* ===== Lista de posts ===== */
+.publicaciones {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.post {
+    background-color: var(--blanco);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 24px 28px;
+}
+
+.post__fecha {
+    font-size: 0.9rem;
+    color: var(--acento);
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.post p:last-child {
+    margin-bottom: 0;
+    color: var(--texto-suave);
+}
+
+/* ===== Pie de página ===== */
+.pie {
+    background-color: var(--principal);
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    padding: 18px 0;
+    font-size: 0.9rem;
+}
+
+.pie p {
+    margin: 0;
+}
+
+/* ===== Celulares ===== */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    .portada,
+    .portada--chica {
+        padding: 24px;
+    }
+
+    .encabezado__interior {
+        justify-content: center;
+    }
+}

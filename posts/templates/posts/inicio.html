@@ -1,0 +1,39 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}Inicio | Blog Django{% endblock %}
+
+{% block content %}
+<section class="portada">
+    <h1>Blog Django</h1>
+    <p class="bienvenida">¡Hola! Bienvenido a mi blog.</p>
+    <p>Acá voy a ir contando lo que aprendo mientras programo en Python y armo mi primer sitio con Django.</p>
+    <a href="{% url 'lista_posts' %}" class="boton">Ver los posts</a>
+</section>
+
+<section class="seccion">
+    <h2>Sobre el proyecto</h2>
+    <p>
+        Este blog empezó como un programa de consola en Python. Con el tiempo lo fui ordenando en funciones,
+        después en módulos y clases, y ahora le toca convertirse en una página web de verdad.
+    </p>
+    <p>
+        Por el momento el sitio tiene tres páginas y todavía no usa base de datos. Más adelante la idea es sumar
+        modelos, formularios y la posibilidad de crear y editar publicaciones desde el navegador.
+    </p>
+</section>
+
+<section class="tarjetas">
+    <article class="tarjeta">
+        <h3>Python</h3>
+        <p>Lo que fui aprendiendo desde los primeros scripts hasta la programación orientada a objetos.</p>
+    </article>
+    <article class="tarjeta">
+        <h3>Django</h3>
+        <p>Cómo se conectan las rutas, las vistas, los templates y los archivos estáticos.</p>
+    </article>
+    <article class="tarjeta">
+        <h3>El proceso</h3>
+        <p>Los errores que me encontré en el camino y cómo los fui resolviendo.</p>
+    </article>
+</section>
+{% endblock %}

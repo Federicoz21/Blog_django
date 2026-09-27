@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Blog Django{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'posts/css/estilos.css' %}">
+</head>
+<body>
+    <header class="encabezado">
+        <div class="contenedor encabezado__interior">
+            <a href="{% url 'inicio' %}" class="logo">Blog Django</a>
+
+            <nav class="menu">
+                <a href="{% url 'inicio' %}" {% if request.resolver_match.url_name == 'inicio' %}class="activo"{% endif %}>Inicio</a>
+                <a href="{% url 'lista_posts' %}" {% if request.resolver_match.url_name == 'lista_posts' %}class="activo"{% endif %}>Posts</a>
+                <a href="{% url 'acerca' %}" {% if request.resolver_match.url_name == 'acerca' %}class="activo"{% endif %}>Acerca de</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="contenedor contenido">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="pie">
+        <div class="contenedor">
+            <p>Blog Django · Hecho por Federico Zangaro · 2026</p>
+        </div>
+    </footer>
+</body>
+</html>
