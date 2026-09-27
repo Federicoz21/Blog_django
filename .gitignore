@@ -1,5 +1,20 @@
+# Entorno virtual
 venv/
+.venv/
+env/
+
+# Archivos que genera Python
 __pycache__/
 *.pyc
+
+# Variables privadas
 .env
+
+# Base de datos local
 db.sqlite3
+
+# Configuración del editor y del sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
