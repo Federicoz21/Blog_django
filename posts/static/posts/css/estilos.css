@@ -1,26 +1,41 @@
 /* ===== Colores y medidas generales ===== */
 :root {
-    --fondo: #f7f5f0;
-    --texto: #23272f;
-    --texto-suave: #5b6270;
-    --principal: #1f4e5f;
-    --acento: #e07a3f;
-    --blanco: #ffffff;
-    --borde: #e3ded3;
-    --radio: 10px;
+    --fondo: #0a0b0d;
+    --fondo-tarjeta: #111318;
+    --borde: #23272f;
+    --texto: #d7dde5;
+    --texto-suave: #8d97a6;
+    --principal: #00e5ff;   /* cian: logo, títulos, menú activo */
+    --acento: #ff2e88;      /* magenta: fechas y detalles */
+    --brillo: rgba(0, 229, 255, 0.35);
+    --radio: 6px;
+    --fuente: "Cascadia Code", "JetBrains Mono", "Fira Code", Consolas, "Courier New", monospace;
 }
 
 * {
     box-sizing: border-box;
 }
 
+::selection {
+    background-color: var(--principal);
+    color: var(--fondo);
+}
+
 body {
     margin: 0;
-    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
+    font-family: var(--fuente);
+    font-size: 16px;
+    line-height: 1.7;
     color: var(--texto);
     background-color: var(--fondo);
+    /* líneas horizontales muy suaves, como un monitor viejo */
+    background-image: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.018) 0,
+        rgba(255, 255, 255, 0.018) 1px,
+        transparent 1px,
+        transparent 3px
+    );
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -35,8 +50,8 @@ body {
 
 /* ===== Encabezado y menú ===== */
 .encabezado {
-    background-color: var(--principal);
-    color: var(--blanco);
+    background-color: #050607;
+    border-bottom: 1px solid var(--borde);
 }
 
 .encabezado__interior {
@@ -50,31 +65,52 @@ body {
 }
 
 .logo {
-    color: var(--blanco);
-    font-size: 1.4rem;
+    color: var(--principal);
+    font-size: 1.3rem;
     font-weight: 700;
     text-decoration: none;
+    text-shadow: 0 0 10px var(--brillo);
+}
+
+.logo::before {
+    content: "> ";
+    color: var(--acento);
+}
+
+/* cursor que titila al lado del logo */
+.logo::after {
+    content: "_";
+    animation: parpadeo 1s steps(1) infinite;
+}
+
+@keyframes parpadeo {
+    50% {
+        opacity: 0;
+    }
 }
 
 .menu {
     display: flex;
-    gap: 8px;
+    gap: 6px;
 }
 
 .menu a {
-    color: var(--blanco);
+    color: var(--texto-suave);
     text-decoration: none;
-    padding: 8px 14px;
-    border-radius: 6px;
-    transition: background-color 0.2s;
+    padding: 6px 12px;
+    border: 1px solid transparent;
+    border-radius: var(--radio);
+    transition: color 0.2s, border-color 0.2s;
 }
 
 .menu a:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--principal);
 }
 
 .menu a.activo {
-    background-color: var(--acento);
+    color: var(--principal);
+    border-color: var(--principal);
+    box-shadow: 0 0 10px var(--brillo);
 }
 
 /* ===== Contenido ===== */
@@ -93,56 +129,86 @@ h3 {
 }
 
 h1 {
-    font-size: 2.6rem;
+    font-size: 2.4rem;
     margin-bottom: 10px;
+    text-shadow: 0 0 14px var(--brillo);
 }
 
 h2 {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+}
+
+/* los subtítulos arrancan con "//" como un comentario de código */
+h2::before {
+    content: "// ";
+    color: var(--acento);
+}
+
+h3 {
+    font-size: 1.1rem;
 }
 
 p {
     margin: 0 0 14px;
 }
 
-.portada {
-    background-color: var(--blanco);
-    border-left: 6px solid var(--acento);
-    border-radius: var(--radio);
-    padding: 36px;
-    margin-bottom: 32px;
+a {
+    color: var(--principal);
 }
 
-.portada--chica {
-    padding: 28px 36px;
+/* bloque de arriba de cada página, como una ventana de terminal */
+.portada {
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-top: 2px solid var(--principal);
+    border-radius: var(--radio);
+    padding: 32px 36px;
+    margin-bottom: 36px;
+}
+
+.portada::before {
+    content: "federico@blog-django:~$";
+    display: block;
+    font-size: 0.85rem;
+    color: var(--acento);
+    margin-bottom: 18px;
 }
 
 .portada--chica h1 {
-    font-size: 2.1rem;
+    font-size: 2rem;
 }
 
 .bienvenida {
-    font-size: 1.25rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--texto);
 }
 
 .boton {
     display: inline-block;
-    margin-top: 8px;
+    margin-top: 10px;
     padding: 10px 22px;
-    background-color: var(--acento);
-    color: var(--blanco);
+    background-color: transparent;
+    color: var(--principal);
+    border: 1px solid var(--principal);
+    border-radius: var(--radio);
     text-decoration: none;
-    font-weight: 600;
-    border-radius: 6px;
+    font-weight: 700;
+    transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.boton::after {
+    content: " →";
 }
 
 .boton:hover {
-    background-color: #c8662f;
+    background-color: var(--principal);
+    color: var(--fondo);
+    box-shadow: 0 0 16px var(--brillo);
 }
 
 .seccion {
-    margin-bottom: 32px;
+    margin-bottom: 34px;
 }
 
 .seccion p {
@@ -151,7 +217,13 @@ p {
 
 .lista {
     color: var(--texto-suave);
-    padding-left: 20px;
+    list-style: none;
+    padding-left: 0;
+}
+
+.lista li::before {
+    content: "$ ";
+    color: var(--acento);
 }
 
 /* ===== Tarjetas de la página de inicio ===== */
@@ -162,10 +234,16 @@ p {
 }
 
 .tarjeta {
-    background-color: var(--blanco);
+    background-color: var(--fondo-tarjeta);
     border: 1px solid var(--borde);
     border-radius: var(--radio);
     padding: 22px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta:hover {
+    border-color: var(--principal);
+    box-shadow: 0 0 14px var(--brillo);
 }
 
 .tarjeta p {
@@ -181,17 +259,35 @@ p {
 }
 
 .post {
-    background-color: var(--blanco);
+    background-color: var(--fondo-tarjeta);
     border: 1px solid var(--borde);
+    border-left: 3px solid var(--acento);
     border-radius: var(--radio);
     padding: 24px 28px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.post:hover {
+    border-color: var(--principal);
+    box-shadow: 0 0 14px var(--brillo);
+}
+
+.post h2::before {
+    content: none;
 }
 
 .post__fecha {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--acento);
-    font-weight: 600;
     margin-bottom: 6px;
+}
+
+.post__fecha::before {
+    content: "[ ";
+}
+
+.post__fecha::after {
+    content: " ]";
 }
 
 .post p:last-child {
@@ -201,11 +297,12 @@ p {
 
 /* ===== Pie de página ===== */
 .pie {
-    background-color: var(--principal);
-    color: rgba(255, 255, 255, 0.8);
+    background-color: #050607;
+    border-top: 1px solid var(--borde);
+    color: var(--texto-suave);
     text-align: center;
     padding: 18px 0;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
 }
 
 .pie p {
@@ -215,15 +312,21 @@ p {
 /* ===== Celulares ===== */
 @media (max-width: 600px) {
     h1 {
-        font-size: 2rem;
+        font-size: 1.9rem;
     }
 
-    .portada,
-    .portada--chica {
+    .portada {
         padding: 24px;
     }
 
     .encabezado__interior {
         justify-content: center;
+    }
+}
+
+/* si la persona tiene desactivadas las animaciones, el cursor queda fijo */
+@media (prefers-reduced-motion: reduce) {
+    .logo::after {
+        animation: none;
     }
 }
