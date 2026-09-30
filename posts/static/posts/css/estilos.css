@@ -295,6 +295,11 @@ a {
     color: var(--texto-suave);
 }
 
+/* últimos posts del inicio */
+.ultimos {
+    margin-bottom: 34px;
+}
+
 /* ===== Pie de página ===== */
 .pie {
     background-color: #050607;

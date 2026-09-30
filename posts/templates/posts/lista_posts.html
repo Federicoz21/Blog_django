@@ -5,15 +5,15 @@
 {% block content %}
 <section class="portada portada--chica">
     <h1>Posts</h1>
-    <p>Las publicaciones del blog, de la más vieja a la más nueva.</p>
+    <p>Las publicaciones del blog, de la más nueva a la más vieja.</p>
 </section>
 
 <section class="publicaciones">
     {% for post in posts %}
         <article class="post">
-            <p class="post__fecha">{{ post.fecha }}</p>
+            <p class="post__fecha">{{ post.fecha_creacion|date:"d/m/Y" }} · {{ post.autor }}</p>
             <h2>{{ post.titulo }}</h2>
-            <p>{{ post.resumen }}</p>
+            <p>{{ post.contenido|linebreaksbr }}</p>
         </article>
     {% empty %}
         <p>Todavía no hay publicaciones.</p>

@@ -10,6 +10,21 @@
     <a href="{% url 'lista_posts' %}" class="boton">Ver los posts</a>
 </section>
 
+<section class="ultimos">
+    <h2>Últimos posts</h2>
+    <div class="publicaciones">
+        {% for post in ultimos_posts %}
+            <article class="post">
+                <p class="post__fecha">{{ post.fecha_creacion|date:"d/m/Y" }} · {{ post.autor }}</p>
+                <h3>{{ post.titulo }}</h3>
+                <p>{{ post.contenido|truncatewords:30 }}</p>
+            </article>
+        {% empty %}
+            <p>Todavía no hay publicaciones.</p>
+        {% endfor %}
+    </div>
+</section>
+
 <section class="seccion">
     <h2>Sobre el proyecto</h2>
     <p>
@@ -17,8 +32,8 @@
         después en módulos y clases, y ahora le toca convertirse en una página web de verdad.
     </p>
     <p>
-        Por el momento el sitio tiene tres páginas y todavía no usa base de datos. Más adelante la idea es sumar
-        modelos, formularios y la posibilidad de crear y editar publicaciones desde el navegador.
+        Ahora los posts se guardan en la base de datos y los cargo desde el panel de administración de Django.
+        Más adelante la idea es sumar formularios para crear y editar publicaciones desde el navegador.
     </p>
 </section>
 
