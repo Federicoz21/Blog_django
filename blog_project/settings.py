@@ -119,6 +119,12 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+# Archivos subidos por los usuarios (las imágenes de los posts)
+# MEDIA_URL: la dirección desde la que se ven en el navegador
+# MEDIA_ROOT: la carpeta donde se guardan en el disco
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

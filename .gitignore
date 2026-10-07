@@ -18,3 +18,7 @@ db.sqlite3
 .idea/
 .DS_Store
 Thumbs.db
+
+# Imágenes que se suben desde el sitio (se guarda solo la carpeta vacía)
+media/posts/*
+!media/posts/.gitkeep

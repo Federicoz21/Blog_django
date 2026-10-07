@@ -1,0 +1,32 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}{{ post.titulo }} | Blog Django{% endblock %}
+
+{% block content %}
+<article class="detalle">
+    <h1>{{ post.titulo }}</h1>
+
+    <div class="detalle__meta">
+        <span class="post__fecha">{{ post.fecha_creacion|date:"d/m/Y H:i" }}</span>
+        <span>Autor: <strong>{{ post.autor }}</strong></span>
+        <span class="estado estado--{{ post.estado }}">{{ post.get_estado_display }}</span>
+    </div>
+
+    {# Antes de usar post.imagen.url hay que fijarse que tenga imagen, si no Django tira error #}
+    {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" class="detalle__imagen">
+    {% else %}
+        <p class="sin-imagen">Este post no tiene imagen.</p>
+    {% endif %}
+
+    <div class="detalle__contenido">
+        {{ post.contenido|linebreaks }}
+    </div>
+
+    <div class="acciones">
+        <a href="{% url 'editar_post' post.pk %}" class="boton">Editar</a>
+        <a href="{% url 'eliminar_post' post.pk %}" class="boton boton--peligro">Eliminar</a>
+        <a href="{% url 'lista_posts' %}" class="boton boton--secundario">Volver a los posts</a>
+    </div>
+</article>
+{% endblock %}

@@ -12,15 +12,27 @@
         <div class="contenedor encabezado__interior">
             <a href="{% url 'inicio' %}" class="logo">Blog Django</a>
 
+            {% with pagina=request.resolver_match.url_name %}
             <nav class="menu">
-                <a href="{% url 'inicio' %}" {% if request.resolver_match.url_name == 'inicio' %}class="activo"{% endif %}>Inicio</a>
-                <a href="{% url 'lista_posts' %}" {% if request.resolver_match.url_name == 'lista_posts' %}class="activo"{% endif %}>Posts</a>
-                <a href="{% url 'acerca' %}" {% if request.resolver_match.url_name == 'acerca' %}class="activo"{% endif %}>Acerca de</a>
+                <a href="{% url 'inicio' %}" {% if pagina == 'inicio' %}class="activo"{% endif %}>Inicio</a>
+                <a href="{% url 'lista_posts' %}" {% if pagina == 'lista_posts' or pagina == 'detalle_post' or pagina == 'editar_post' or pagina == 'eliminar_post' %}class="activo"{% endif %}>Posts</a>
+                <a href="{% url 'crear_post' %}" {% if pagina == 'crear_post' %}class="activo"{% endif %}>Nuevo post</a>
+                <a href="{% url 'acerca' %}" {% if pagina == 'acerca' %}class="activo"{% endif %}>Acerca de</a>
             </nav>
+            {% endwith %}
         </div>
     </header>
 
     <main class="contenedor contenido">
+        {# Avisos que dejan las vistas después de crear, editar o eliminar #}
+        {% if messages %}
+            <div class="mensajes">
+                {% for message in messages %}
+                    <p class="mensaje mensaje--{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         {% block content %}{% endblock %}
     </main>
 

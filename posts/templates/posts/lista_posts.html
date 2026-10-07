@@ -5,18 +5,36 @@
 {% block content %}
 <section class="portada portada--chica">
     <h1>Posts</h1>
-    <p>Las publicaciones del blog, de la más nueva a la más vieja.</p>
+    <p>Todas las publicaciones del blog, de la más nueva a la más vieja.</p>
+    <a href="{% url 'crear_post' %}" class="boton">Nuevo post</a>
 </section>
 
 <section class="publicaciones">
     {% for post in posts %}
-        <article class="post">
-            <p class="post__fecha">{{ post.fecha_creacion|date:"d/m/Y" }} · {{ post.autor }}</p>
-            <h2>{{ post.titulo }}</h2>
-            <p>{{ post.contenido|linebreaksbr }}</p>
+        <article class="post{% if post.imagen %} post--con-imagen{% endif %}">
+            {# La miniatura aparece solo si el post tiene imagen #}
+            {% if post.imagen %}
+                <a href="{% url 'detalle_post' post.pk %}" class="post__miniatura">
+                    <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}">
+                </a>
+            {% endif %}
+
+            <div class="post__cuerpo">
+                <div class="post__cabecera">
+                    <p class="post__fecha">{{ post.fecha_creacion|date:"d/m/Y" }} · {{ post.autor }}</p>
+                    <span class="estado estado--{{ post.estado }}">{{ post.get_estado_display }}</span>
+                </div>
+                <h2><a href="{% url 'detalle_post' post.pk %}">{{ post.titulo }}</a></h2>
+                <p>{{ post.contenido|truncatewords:40 }}</p>
+                <p class="post__acciones">
+                    <a href="{% url 'detalle_post' post.pk %}">Leer más</a>
+                    <a href="{% url 'editar_post' post.pk %}">Editar</a>
+                    <a href="{% url 'eliminar_post' post.pk %}" class="enlace-peligro">Eliminar</a>
+                </p>
+            </div>
         </article>
     {% empty %}
-        <p>Todavía no hay publicaciones.</p>
+        <p>Todavía no hay publicaciones. <a href="{% url 'crear_post' %}">Creá la primera</a>.</p>
     {% endfor %}
 </section>
 {% endblock %}

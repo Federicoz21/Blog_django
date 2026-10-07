@@ -1,0 +1,26 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}Eliminar post | Blog Django{% endblock %}
+
+{% block content %}
+<section class="portada portada--chica confirmacion">
+    <h1>Eliminar post</h1>
+    <p>
+        ¿Seguro que querés eliminar <strong>«{{ post.titulo }}»</strong>?
+        Esta acción no se puede deshacer{% if post.imagen %} y también se borra su imagen{% endif %}.
+    </p>
+
+    {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" alt="{{ post.titulo }}" class="confirmacion__imagen">
+    {% endif %}
+
+    {# El borrado se hace con POST: entrar a esta página no elimina nada #}
+    <form method="post">
+        {% csrf_token %}
+        <div class="acciones">
+            <button type="submit" class="boton boton--peligro">Sí, eliminar</button>
+            <a href="{% url 'detalle_post' post.pk %}" class="boton boton--secundario">Cancelar</a>
+        </div>
+    </form>
+</section>
+{% endblock %}

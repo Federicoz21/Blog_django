@@ -7,6 +7,8 @@
     --texto-suave: #8d97a6;
     --principal: #00e5ff;   /* cian: logo, títulos, menú activo */
     --acento: #ff2e88;      /* magenta: fechas y detalles */
+    --ok: #3ddc97;          /* verde: avisos y posts publicados */
+    --aviso: #ffc857;       /* amarillo: borradores */
     --brillo: rgba(0, 229, 255, 0.35);
     --radio: 6px;
     --fuente: "Cascadia Code", "JetBrains Mono", "Fira Code", Consolas, "Courier New", monospace;
@@ -91,6 +93,7 @@ body {
 
 .menu {
     display: flex;
+    flex-wrap: wrap;
     gap: 6px;
 }
 
@@ -300,6 +303,349 @@ a {
     margin-bottom: 34px;
 }
 
+/* títulos de los posts como links */
+.post h2 a,
+.post h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.post h2 a:hover,
+.post h3 a:hover {
+    text-shadow: 0 0 10px var(--brillo);
+}
+
+/* post con imagen: miniatura a la izquierda y el texto a la derecha */
+.post--con-imagen {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.post__miniatura img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+}
+
+.post__cuerpo {
+    min-width: 0;
+}
+
+.post__cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    margin-bottom: 6px;
+}
+
+.post__cabecera .post__fecha {
+    margin: 0;
+}
+
+.post__acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    font-size: 0.9rem;
+}
+
+.post__acciones a {
+    text-decoration: none;
+}
+
+.post__acciones a:hover {
+    text-decoration: underline;
+}
+
+.enlace-peligro {
+    color: var(--acento);
+}
+
+/* etiqueta con el estado del post */
+.estado {
+    display: inline-block;
+    padding: 1px 10px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    line-height: 1.6;
+}
+
+.estado--publicado {
+    color: var(--ok);
+}
+
+.estado--borrador {
+    color: var(--aviso);
+}
+
+.estado--archivado {
+    color: var(--texto-suave);
+}
+
+/* ===== Avisos (post creado, editado, eliminado) ===== */
+.mensajes {
+    margin-bottom: 26px;
+}
+
+.mensaje {
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-left: 3px solid var(--principal);
+    border-radius: var(--radio);
+    padding: 12px 18px;
+    margin: 0 0 10px;
+}
+
+.mensaje--success {
+    border-left-color: var(--ok);
+}
+
+.mensaje--success::before {
+    content: "✓ ";
+    color: var(--ok);
+}
+
+/* ===== Botones extra ===== */
+button.boton {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    cursor: pointer;
+}
+
+.boton--secundario {
+    color: var(--texto-suave);
+    border-color: var(--borde);
+}
+
+.boton--secundario:hover {
+    background-color: var(--borde);
+    color: var(--texto);
+    box-shadow: none;
+}
+
+.boton--peligro {
+    color: var(--acento);
+    border-color: var(--acento);
+}
+
+.boton--peligro:hover {
+    background-color: var(--acento);
+    color: var(--fondo);
+    box-shadow: 0 0 16px rgba(255, 46, 136, 0.35);
+}
+
+.boton--secundario::after,
+.boton--peligro::after {
+    content: none;
+}
+
+.acciones {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.acciones .boton {
+    margin-top: 0;
+}
+
+/* ===== Detalle de un post ===== */
+.detalle {
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-top: 2px solid var(--principal);
+    border-radius: var(--radio);
+    padding: 32px 36px;
+}
+
+.detalle h1 {
+    overflow-wrap: anywhere;
+}
+
+.detalle__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 18px;
+    font-size: 0.9rem;
+    color: var(--texto-suave);
+}
+
+.detalle__meta .post__fecha {
+    margin: 0;
+}
+
+.detalle__meta strong {
+    color: var(--texto);
+}
+
+.detalle__imagen {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    max-height: 560px;
+    margin: 26px auto;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+}
+
+.sin-imagen {
+    margin: 26px 0;
+    padding: 18px;
+    border: 1px dashed var(--borde);
+    border-radius: var(--radio);
+    color: var(--texto-suave);
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.detalle__contenido {
+    overflow-wrap: anywhere;
+}
+
+/* ===== Formulario para crear y editar ===== */
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    background-color: var(--fondo-tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 30px 36px;
+}
+
+.formulario .acciones {
+    margin-top: 4px;
+}
+
+.campo__label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--principal);
+    font-weight: 700;
+}
+
+.campo__label::before {
+    content: "> ";
+    color: var(--acento);
+}
+
+.campo input[type="text"],
+.campo textarea,
+.campo select {
+    width: 100%;
+    padding: 10px 12px;
+    background-color: var(--fondo);
+    color: var(--texto);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    font: inherit;
+}
+
+.campo textarea {
+    min-height: 220px;
+    resize: vertical;
+}
+
+.campo select option {
+    background-color: var(--fondo);
+}
+
+.campo input[type="text"]:focus,
+.campo textarea:focus,
+.campo select:focus {
+    outline: none;
+    border-color: var(--principal);
+    box-shadow: 0 0 10px var(--brillo);
+}
+
+.campo input[type="checkbox"] {
+    margin: 0 4px 0 10px;
+    vertical-align: middle;
+    accent-color: var(--acento);
+}
+
+.campo input[type="file"] {
+    max-width: 100%;
+    margin-top: 4px;
+    color: var(--texto-suave);
+    font: inherit;
+}
+
+.campo input[type="file"]::file-selector-button {
+    margin-right: 12px;
+    padding: 6px 14px;
+    background-color: transparent;
+    color: var(--principal);
+    border: 1px solid var(--principal);
+    border-radius: var(--radio);
+    font: inherit;
+    cursor: pointer;
+}
+
+.campo input[type="file"]::file-selector-button:hover {
+    background-color: var(--principal);
+    color: var(--fondo);
+}
+
+.campo__vista-previa {
+    display: block;
+    max-width: 260px;
+    max-height: 200px;
+    margin-bottom: 12px;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+}
+
+.campo__ayuda {
+    margin: 8px 0 0;
+    font-size: 0.85rem;
+    color: var(--texto-suave);
+}
+
+.campo__error {
+    margin: 6px 0 0;
+    font-size: 0.9rem;
+    color: var(--acento);
+}
+
+.campo--error input[type="text"],
+.campo--error textarea,
+.campo--error select {
+    border-color: var(--acento);
+}
+
+/* ===== Confirmación de borrado ===== */
+.confirmacion {
+    border-top-color: var(--acento);
+}
+
+.confirmacion h1 {
+    color: var(--acento);
+    text-shadow: 0 0 14px rgba(255, 46, 136, 0.35);
+}
+
+.confirmacion__imagen {
+    display: block;
+    max-width: 240px;
+    max-height: 180px;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+}
+
 /* ===== Pie de página ===== */
 .pie {
     background-color: #050607;
@@ -326,6 +672,19 @@ a {
 
     .encabezado__interior {
         justify-content: center;
+    }
+
+    .menu {
+        justify-content: center;
+    }
+
+    .post--con-imagen {
+        grid-template-columns: 1fr;
+    }
+
+    .detalle,
+    .formulario {
+        padding: 24px;
     }
 }
 

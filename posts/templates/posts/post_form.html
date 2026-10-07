@@ -1,0 +1,56 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}{{ titulo_pagina }} | Blog Django{% endblock %}
+
+{% block content %}
+<section class="portada portada--chica">
+    <h1>{{ titulo_pagina }}</h1>
+    {% if post %}
+        <p>Cambiá lo que necesites y guardá. También podés reemplazar o quitar la imagen.</p>
+    {% else %}
+        <p>Completá los datos del post. La imagen es opcional.</p>
+    {% endif %}
+</section>
+
+{# enctype="multipart/form-data" es obligatorio para que la imagen llegue al servidor #}
+<form method="post" enctype="multipart/form-data" class="formulario">
+    {% csrf_token %}
+
+    {% for error in form.non_field_errors %}
+        <p class="campo__error">{{ error }}</p>
+    {% endfor %}
+
+    {% for campo in form %}
+        <div class="campo{% if campo.errors %} campo--error{% endif %}">
+            <label for="{{ campo.id_for_label }}" class="campo__label">{{ campo.label }}</label>
+
+            {% if campo.name == 'imagen' and imagen_actual_url %}
+                <img src="{{ imagen_actual_url }}" alt="Imagen actual del post" class="campo__vista-previa">
+            {% endif %}
+
+            {{ campo }}
+
+            {% if campo.name == 'imagen' %}
+                {% if imagen_actual_url %}
+                    <p class="campo__ayuda">Para cambiarla, elegí otro archivo en «Modificar». Para quitarla, marcá «Eliminar» y guardá.</p>
+                {% else %}
+                    <p class="campo__ayuda">JPG, PNG, GIF o WEBP. Si no elegís ninguna, el post se guarda sin imagen.</p>
+                {% endif %}
+            {% endif %}
+
+            {% for error in campo.errors %}
+                <p class="campo__error">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <div class="acciones">
+        <button type="submit" class="boton">{{ texto_boton }}</button>
+        {% if post %}
+            <a href="{% url 'detalle_post' post.pk %}" class="boton boton--secundario">Cancelar</a>
+        {% else %}
+            <a href="{% url 'lista_posts' %}" class="boton boton--secundario">Cancelar</a>
+        {% endif %}
+    </div>
+</form>
+{% endblock %}

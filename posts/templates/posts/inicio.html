@@ -16,7 +16,7 @@
         {% for post in ultimos_posts %}
             <article class="post">
                 <p class="post__fecha">{{ post.fecha_creacion|date:"d/m/Y" }} · {{ post.autor }}</p>
-                <h3>{{ post.titulo }}</h3>
+                <h3><a href="{% url 'detalle_post' post.pk %}">{{ post.titulo }}</a></h3>
                 <p>{{ post.contenido|truncatewords:30 }}</p>
             </article>
         {% empty %}
@@ -32,8 +32,8 @@
         después en módulos y clases, y ahora le toca convertirse en una página web de verdad.
     </p>
     <p>
-        Ahora los posts se guardan en la base de datos y los cargo desde el panel de administración de Django.
-        Más adelante la idea es sumar formularios para crear y editar publicaciones desde el navegador.
+        Los posts se guardan en la base de datos y ahora también se pueden crear, editar y eliminar desde el propio
+        sitio, con una imagen opcional para cada uno. Más adelante la idea es sumar usuarios y permisos.
     </p>
 </section>
 
