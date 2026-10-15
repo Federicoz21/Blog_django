@@ -4,7 +4,7 @@ Blog web hecho con Django, que voy armando a lo largo del curso.
 
 ## Descripción
 
-El proyecto se llama `blog_project` y tiene una app principal, `posts`.
+El proyecto se llama `blog_project` y tiene dos apps: `posts` y `accounts`.
 
 El blog se recorre desde el navegador: tiene una página de inicio, una lista de posts y una página "Acerca de". Todas comparten el mismo encabezado, menú y pie gracias a un template base, y los estilos salen de un archivo CSS propio.
 
@@ -274,7 +274,7 @@ Los posts se siguen pudiendo cargar desde ahí también: en **Posts** tocá **Ag
 
 Se puede pasar de una a otra con el menú de arriba. La página en la que estás aparece resaltada.
 
-En **Inicio** aparecen los 3 últimos posts **publicados**. En **Posts** aparecen todos, también los borradores y archivados, para poder editarlos desde el sitio. Cuando en el próximo módulo se sumen usuarios y permisos, la idea es que esa gestión quede solo para quien tenga permiso.
+En **Inicio** aparecen los 3 últimos posts **publicados**. En **Posts** aparecen todos, también los borradores y archivados, para poder editarlos desde el sitio. Ahora la creación, edición y eliminación requieren iniciar sesión.
 
 ## Modelo Post
 
@@ -369,7 +369,8 @@ El `.gitignore` deja afuera el entorno virtual (`venv/`), los archivos `__pycach
 
 ## Aplicaciones
 
-- `posts`: app principal del blog. Tiene el modelo `Post`, el formulario `PostForm`, las vistas del CRUD, las rutas, los templates y el CSS del sitio.
+- `posts`: publicaciones, formularios, vistas del CRUD, rutas y estilos del sitio.
+- `accounts`: registro, login, logout y perfiles de usuario.
 
 ## Dependencias
 
