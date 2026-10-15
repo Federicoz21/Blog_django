@@ -16,7 +16,14 @@
             <nav class="menu">
                 <a href="{% url 'inicio' %}" {% if pagina == 'inicio' %}class="activo"{% endif %}>Inicio</a>
                 <a href="{% url 'lista_posts' %}" {% if pagina == 'lista_posts' or pagina == 'detalle_post' or pagina == 'editar_post' or pagina == 'eliminar_post' %}class="activo"{% endif %}>Posts</a>
-                <a href="{% url 'crear_post' %}" {% if pagina == 'crear_post' %}class="activo"{% endif %}>Nuevo post</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'crear_post' %}">Nuevo post</a>
+                <a href="{% url 'perfil' %}">Mi perfil</a>
+                <form method="post" action="{% url 'logout' %}" class="menu__salir">{% csrf_token %}<button type="submit">Cerrar sesión</button></form>
+                {% else %}
+                <a href="{% url 'login' %}">Iniciar sesión</a>
+                <a href="{% url 'registro' %}">Registrarse</a>
+                {% endif %}
                 <a href="{% url 'acerca' %}" {% if pagina == 'acerca' %}class="activo"{% endif %}>Acerca de</a>
             </nav>
             {% endwith %}
