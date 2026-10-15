@@ -1,0 +1,33 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}Editar perfil | Blog Django{% endblock %}
+
+{% block content %}
+<section class="portada portada--chica">
+    <h1>Editar perfil</h1>
+    <p>Podés cambiar tu biografía, agregar un sitio web y subir una foto.</p>
+</section>
+
+<form method="post" enctype="multipart/form-data" class="formulario">
+    {% csrf_token %}
+    {% for error in form.non_field_errors %}
+        <p class="campo__error">{{ error }}</p>
+    {% endfor %}
+    {% for campo in form %}
+        <div class="campo{% if campo.errors %} campo--error{% endif %}">
+            <label for="{{ campo.id_for_label }}" class="campo__label">{{ campo.label }}</label>
+            {% if campo.name == 'avatar' and perfil.avatar %}
+                <img src="{{ perfil.avatar.url }}" alt="Foto actual" class="campo__vista-previa">
+            {% endif %}
+            {{ campo }}
+            {% for error in campo.errors %}
+                <p class="campo__error">{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <div class="acciones">
+        <button type="submit" class="boton">Guardar cambios</button>
+        <a href="{% url 'perfil' %}" class="boton boton--secundario">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

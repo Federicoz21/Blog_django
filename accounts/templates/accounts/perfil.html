@@ -1,0 +1,29 @@
+{% extends 'posts/base.html' %}
+
+{% block title %}Mi perfil | Blog Django{% endblock %}
+
+{% block content %}
+<section class="detalle">
+    <h1>Mi perfil</h1>
+    <h2>{{ user.username }}</h2>
+    {% if perfil.avatar %}
+        <img src="{{ perfil.avatar.url }}" alt="Foto de perfil de {{ user.username }}" class="perfil__avatar">
+    {% else %}
+        <p class="sin-imagen">Todavía no subiste una foto de perfil.</p>
+    {% endif %}
+    {% if user.email %}
+        <p><strong>Correo:</strong> {{ user.email }}</p>
+    {% endif %}
+    <h3>Biografía</h3>
+    <div class="detalle__contenido">
+        {{ perfil.biografia|default:"Todavía no escribiste una biografía."|linebreaks }}
+    </div>
+    {% if perfil.link_web %}
+        <p><a href="{{ perfil.link_web }}" rel="noopener noreferrer">Mi página web</a></p>
+    {% endif %}
+    <div class="acciones">
+        <a href="{% url 'editar_perfil' %}" class="boton">Editar perfil</a>
+        <a href="{% url 'lista_posts' %}" class="boton boton--secundario">Volver a los posts</a>
+    </div>
+</section>
+{% endblock %}
