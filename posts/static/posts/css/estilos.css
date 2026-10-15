@@ -694,3 +694,9 @@ button.boton {
         animation: none;
     }
 }
+
+/* Formularios de usuarios */
+.menu__salir { display:inline-flex; margin:0; }
+.menu__salir button { background:none; border:0; color:var(--texto-suave); padding:6px 12px; font:inherit; cursor:pointer; }
+.campo input[type=password], .campo input[type=email], .campo input[type=url] { width:100%; padding:10px; background:var(--fondo); color:var(--texto); border:1px solid var(--borde); font:inherit; }
+.perfil__avatar { width:140px; height:140px; object-fit:cover; margin:20px 0; }
