@@ -240,6 +240,22 @@ python manage.py test posts
 
 Los tests guardan las imágenes en una carpeta temporal, así que no ensucian `media/`.
 
+## Usuarios y perfiles (Preentrega 11)
+
+Se agregó la app `accounts`, con registro (`/usuarios/registro/`), login (`/usuarios/login/`), logout por POST, perfil (`/usuarios/perfil/`) y edición (`/usuarios/perfil/editar/`).
+
+El modelo `Perfil` tiene relación `OneToOneField` con el usuario y guarda biografía, web y avatar. Se crea desde el registro, sin signals. Si ya existía el usuario, se crea al abrir su perfil. El avatar usa `request.FILES` y se guarda en `media/avatares/`. La configuración MEDIA del módulo 10 se conserva.
+
+Crear, editar y borrar posts requieren login. La lista y el detalle siguen públicos. También se puede acceder al formulario desde `/post/nuevo/`.
+
+Para actualizar y probar:
+
+```bash
+python manage.py migrate
+python manage.py test
+python manage.py runserver
+```
+
 ## Panel de administración
 
 Con el servidor andando, entrá a http://127.0.0.1:8000/admin/ con el usuario y la contraseña del superusuario.
@@ -374,7 +390,8 @@ pip freeze | Out-File -Encoding ascii requirements.txt
 - Preentrega 7 (base del proyecto Django y app `posts`): quedó guardada tal cual se entregó en la rama [`preentrega-7`](https://github.com/Federicoz21/Blog_django/tree/preentrega-7).
 - Preentrega 8 (templates, herencia, rutas, vistas y CSS): quedó guardada en la rama [`preentrega-8`](https://github.com/Federicoz21/Blog_django/tree/preentrega-8).
 - Preentrega 9 (modelo `Post`, migraciones y panel admin): quedó guardada en la rama [`preentrega-9`](https://github.com/Federicoz21/Blog_django/tree/preentrega-9).
-- Preentrega 10 (CRUD de posts con imágenes): es lo que está en `main`.
+- Preentrega 10 (CRUD e imágenes): rama `preentrega-10`.
+- Preentrega 11 (autenticación y perfiles): rama `preentrega-11` y `main`.
 
 ## Autor
 
